@@ -26,7 +26,8 @@ async function create(article){
       VALUES 
       ('${article.title}', '${article.authorNom}', '${article.authorPrenom}', '${article.content}')`
     );
-    return {"New row added"};
+      msg = "New row added";
+    return {msg};
     }  catch (err) {
   return{err.stack};
   }
@@ -41,7 +42,8 @@ async function create(article){
       content="${article.content}" 
       WHERE id=${id}` 
     );
-      return {"Row updated"};
+    msg = "Row updated";
+    return {msg};
     }catch (err) {
   return{err.stack};
   }
@@ -52,7 +54,8 @@ async function create(article){
     const result = await pool.query(
       `DELETE FROM Article WHERE id=${id}`
     );
-      return{"Row deleted"};
+      msg = "Row deleted";
+    return {msg};
     } catch (err) {
   return{err.stack};
   }
