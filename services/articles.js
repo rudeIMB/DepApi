@@ -19,50 +19,44 @@ async function getMultiple(page = 1){
 
 async function create(article){
     console.log(article.authorNom);
+    try{
     const result = await pool.query(
       `INSERT INTO Article 
       (title, authorNom, authorPrenom, content) 
       VALUES 
       ('${article.title}', '${article.authorNom}', '${article.authorPrenom}', '${article.content}')`
     );
-    let message = 'Error in article';
+    return {"New row added"};
+    }  catch (err) {
+  return{err.stack};
+  }
   
-    if (result.affectedRows) {
-      message = 'Article created successfully';
-    }
-  
-    return {message};
   }
 
   async function update(id, article){
+    try{
     const result = await pool.query(
       `UPDATE Article 
       SET title="${article.title}", authorNom="${article.authorNom}", authorPrenom="${article.authorPrenom}", 
       content="${article.content}" 
       WHERE id=${id}` 
     );
-  
-    let message = 'Error in updating article';
-  
-    if (result.affectedRows) {
-      message = 'Article updated successfully';
-    }
-  
-    return {message};
+      return {"Row updated"};
+    }catch (err) {
+  return{err.stack};
+  }
   }
 
   async function remove(id){
+    try{
     const result = await pool.query(
       `DELETE FROM Article WHERE id=${id}`
     );
-  
-    let message = 'Error in deleting article';
-  
-    if (result.affectedRows) {
-      message = 'Article deleted successfully';
-    }
-  
-    return {message};
+      return{"Row deleted"};
+    } catch (err) {
+  return{err.stack};
+  }
+
   }
 
 module.exports = {
