@@ -29,7 +29,7 @@ async function create(article){
       msg = "New row added";
     return {msg};
     }  catch (err) {
-  return{err.stack};
+  return{err};
   }
   
   }
@@ -45,7 +45,7 @@ async function create(article){
     msg = "Row updated";
     return {msg};
     }catch (err) {
-  return{err.stack};
+  return{err};
   }
   }
 
@@ -57,7 +57,7 @@ async function create(article){
       msg = "Row deleted";
     return {msg};
     } catch (err) {
-  return{err.stack};
+  return{err};
   }
 
   }
